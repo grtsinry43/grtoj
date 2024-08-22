@@ -1,27 +1,42 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import logo from "@/assets/logo.png";
+import { routes } from "@/router/routes";
+import { useRouter } from "vue-router";
+import { ref } from "vue";
+
+const router = useRouter();
+
+const menuItemClickHandle = (key: string) => {
+  router.push(key);
+};
+
+const curMenuItem = ref(["/"]);
+
+router.afterEach((to) => {
+  curMenuItem.value = [to.path];
+});
+</script>
 
 <template>
   <a-layout-header class="nav-container">
-    <a-menu mode="horizontal" :default-selected-keys="['1']">
+    <a-menu
+      mode="horizontal"
+      :selected-keys="curMenuItem"
+      @menu-item-click="menuItemClickHandle"
+    >
       <a-menu-item
         key="0"
         :style="{ padding: 0, marginRight: '38px' }"
         disabled
       >
-        <div
-          :style="{
-            width: '80px',
-            height: '30px',
-            borderRadius: '2px',
-            background: 'var(--color-fill-3)',
-            cursor: 'text',
-          }"
-        />
+        <div class="logo-container">
+          <img :src="logo" alt="grtoj-logo" />
+        </div>
+        <h1 style="display: none">GRTOJ</h1>
       </a-menu-item>
-      <a-menu-item key="1">Home</a-menu-item>
-      <a-menu-item key="2">Solution</a-menu-item>
-      <a-menu-item key="3">Cloud Service</a-menu-item>
-      <a-menu-item key="4">Cooperation</a-menu-item>
+      <a-menu-item v-for="item in routes" :key="item.path">
+        {{ item.name }}
+      </a-menu-item>
     </a-menu>
   </a-layout-header>
 </template>
@@ -36,5 +51,16 @@
   padding: 0 50px;
   background-color: #fff;
   box-shadow: 0 2px 8px #f0f1f2;
+}
+
+.logo-container img {
+  height: 30px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.logo-container {
+  height: 100%;
+  display: flex;
 }
 </style>

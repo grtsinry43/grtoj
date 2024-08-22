@@ -1,11 +1,7 @@
 <template>
-  <a-calendar v-model="value" />
-  <nav>
-    <router-link to="/">Home</router-link>
-    |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <div id="app">
+    <BasicLayout />
+  </div>
 </template>
 
 <style>
@@ -31,7 +27,16 @@ nav a.router-link-exact-active {
 }
 </style>
 
-<script setup lang="ts">
-import { ref } from "vue";
-const value = ref(new Date("2023-01-01"));
+<script lang="ts">
+import BasicLayout from "@/layouts/BasicLayout.vue";
+
+export default {
+  name: "App",
+  components: {
+    BasicLayout,
+  },
+  setup() {
+    return {};
+  },
+};
 </script>

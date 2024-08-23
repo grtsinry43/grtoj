@@ -1,4 +1,4 @@
-package com.grtsinry43.grtojbackend;
+package com.grtsinry43.grtoj;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

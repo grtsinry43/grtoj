@@ -1,6 +1,6 @@
-package com.grtsinry43.grtojbackend.controller;
+package com.grtsinry43.grtoj.controller;
 
-import com.grtsinry43.grtojbackend.dto.ApiResponse;
+import com.grtsinry43.grtoj.dto.ApiResponse;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

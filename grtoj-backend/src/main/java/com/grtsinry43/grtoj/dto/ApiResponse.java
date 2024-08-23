@@ -1,4 +1,4 @@
-package com.grtsinry43.grtojbackend.dto;
+package com.grtsinry43.grtoj.dto;
 
 import lombok.Data;
 

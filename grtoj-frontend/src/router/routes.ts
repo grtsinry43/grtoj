@@ -6,6 +6,11 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "题集",
     component: HomeView,
+    meta: {
+      adminOnly: false,
+      requireLogin: false,
+      visible: true,
+    },
   },
   {
     path: "/about",
@@ -15,5 +20,32 @@ export const routes: Array<RouteRecordRaw> = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    meta: {
+      adminOnly: false,
+      requireLogin: false,
+      visible: true,
+    },
+  },
+  {
+    path: "/admin",
+    name: "管理员",
+    component: () =>
+      import(/* webpackChunkName: "admin" */ "../views/AdminView.vue"),
+    meta: {
+      adminOnly: true,
+      requireLogin: true,
+      visible: false,
+    },
+  },
+  {
+    path: "/login",
+    name: "登录",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../views/LoginView.vue"),
+    meta: {
+      adminOnly: false,
+      requireLogin: false,
+      visible: false,
+    },
   },
 ];

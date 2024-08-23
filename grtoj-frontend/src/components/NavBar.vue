@@ -4,6 +4,7 @@ import { routes } from "@/router/routes";
 import { useRouter } from "vue-router";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import checkAccess from "@/permissions/checkAccess";
 
 const router = useRouter();
 
@@ -18,35 +19,43 @@ router.afterEach((to) => {
 });
 
 const store = useStore();
-setTimeout(() => {
-  store.dispatch("user/getUserInfo");
-}, 3000);
+// setTimeout(() => {
+//   store.dispatch("user/getUserInfo");
+// }, 3000);
+store.dispatch("user/getUserInfo");
 
+const loginUser = computed(() => store.state.user.loginUser);
+console.log(loginUser.value);
 const visibleRoutes = computed(() =>
-  routes.filter((route) => route.meta?.visible)
+  routes.filter((item) => {
+    console.log(
+      item,
+      checkAccess(loginUser.value, item.meta?.access as string)
+    );
+    if (!item.meta?.visible) {
+      return false;
+    }
+    return checkAccess(loginUser.value, item.meta?.access as string);
+  })
 );
 </script>
 
 <template>
   <a-layout-header class="nav-container">
-    <a-row style="width: 100%" align="center">
-      <a-col flex="auto">
+    <a-row style="width: 100%" align="center" :wrap="false">
+      <a-col flex="100px">
+        <div class="logo-container">
+          <img :src="logo" alt="grtoj-logo" />
+        </div>
+        <h1 style="display: none">GRTOJ</h1>
+      </a-col>
+      <a-col flex="auto" style="align-items: start">
         <a-menu
           mode="horizontal"
           :selected-keys="curMenuItem"
           @menu-item-click="menuItemClickHandle"
           class="nav-inner"
         >
-          <a-menu-item
-            key="0"
-            :style="{ padding: 0, marginRight: '38px' }"
-            disabled
-          >
-            <div class="logo-container">
-              <img :src="logo" alt="grtoj-logo" />
-            </div>
-            <h1 style="display: none">GRTOJ</h1>
-          </a-menu-item>
           <a-menu-item v-for="item in visibleRoutes" :key="item.path">
             {{ item.name }}
           </a-menu-item>
@@ -66,15 +75,13 @@ const visibleRoutes = computed(() =>
   position: fixed;
   justify-content: space-between;
   align-items: center;
-  padding: 0 50px;
+  padding: 0 20px;
   background-color: #fff;
   box-shadow: 0 2px 8px #f0f1f2;
 }
 
 .logo-container img {
-  height: 30px;
-  margin-top: auto;
-  margin-bottom: auto;
+  height: 25px;
 }
 
 .logo-container {

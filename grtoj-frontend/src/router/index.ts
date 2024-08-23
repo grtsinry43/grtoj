@@ -20,14 +20,14 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-// 添加路由守卫，需要管理员权限的页面会检查 isAdmin
-router.beforeEach((to, from, next) => {
-  // 检查路由元信息
-  if (to.meta?.adminOnly && !localStorage.getItem("isAdmin")) {
-    next({ name: "题集" });
-  } else {
-    next();
-  }
-});
+// // 添加路由守卫，需要管理员权限的页面会检查 isAdmin
+// router.beforeEach((to, from, next) => {
+//   // 检查路由元信息
+//   if (to.meta?.adminOnly && !localStorage.getItem("isAdmin")) {
+//     next({ name: "题集" });
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;

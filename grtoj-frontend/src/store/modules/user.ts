@@ -1,8 +1,9 @@
 import { StoreOptions } from "vuex";
 
 // 定义类型，解决ts报错
-interface User {
+export interface User {
   userName: string;
+  userRole?: string;
 }
 
 interface State {
@@ -27,6 +28,7 @@ export default {
       // TODO: api获取用户信息
       commit("updateUser", {
         userName: "Just Login",
+        userRole: "admin",
       });
     },
   },

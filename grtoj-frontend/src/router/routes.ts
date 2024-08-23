@@ -1,5 +1,6 @@
 import { RouteRecordRaw } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
+import ACCESS_ENUM from "@/permissions/accessEnum";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -10,6 +11,7 @@ export const routes: Array<RouteRecordRaw> = [
       adminOnly: false,
       requireLogin: false,
       visible: true,
+      access: ACCESS_ENUM.NOT_LOGIN,
     },
   },
   {
@@ -24,6 +26,7 @@ export const routes: Array<RouteRecordRaw> = [
       adminOnly: false,
       requireLogin: false,
       visible: true,
+      access: ACCESS_ENUM.NOT_LOGIN,
     },
   },
   {
@@ -34,7 +37,8 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       adminOnly: true,
       requireLogin: true,
-      visible: false,
+      visible: true,
+      access: ACCESS_ENUM.ADMIN,
     },
   },
   {
@@ -45,7 +49,8 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       adminOnly: false,
       requireLogin: false,
-      visible: false,
+      visible: true,
+      access: ACCESS_ENUM.NOT_LOGIN,
     },
   },
 ];

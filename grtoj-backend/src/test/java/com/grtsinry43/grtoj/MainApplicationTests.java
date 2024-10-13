@@ -3,11 +3,16 @@ package com.grtsinry43.grtoj;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class GrtojBackendApplicationTests {
+/**
+ * 主类测试
+ *
 
-	@Test
-	void contextLoads() {
-	}
+ */
+@SpringBootTest
+class MainApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
 
 }

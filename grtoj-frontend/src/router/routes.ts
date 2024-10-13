@@ -37,7 +37,7 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       adminOnly: true,
       requireLogin: true,
-      visible: true,
+      visible: false,
       access: ACCESS_ENUM.ADMIN,
     },
   },

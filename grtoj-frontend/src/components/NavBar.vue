@@ -19,19 +19,15 @@ router.afterEach((to) => {
 });
 
 const store = useStore();
-// setTimeout(() => {
-//   store.dispatch("user/getUserInfo");
-// }, 3000);
-store.dispatch("user/getUserInfo");
+
+console.log("Navbar拿到的数据");
+console.log(store.state.user.loginUser);
 
 const loginUser = computed(() => store.state.user.loginUser);
+console.log("loginUser");
 console.log(loginUser.value);
 const visibleRoutes = computed(() =>
   routes.filter((item) => {
-    console.log(
-      item,
-      checkAccess(loginUser.value, item.meta?.access as string)
-    );
     if (!item.meta?.visible) {
       return false;
     }
@@ -62,7 +58,7 @@ const visibleRoutes = computed(() =>
         </a-menu>
       </a-col>
       <a-col flex="100px" class="cur-user">
-        <div>{{ store.state.user.loginUser.userName }}</div>
+        <div>{{ loginUser.userName }}111</div>
       </a-col>
     </a-row>
   </a-layout-header>

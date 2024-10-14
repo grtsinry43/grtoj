@@ -41,16 +41,45 @@ export const routes: Array<RouteRecordRaw> = [
       access: ACCESS_ENUM.ADMIN,
     },
   },
+  // {
+  //   path: "/login",
+  //   name: "登录",
+  //   component: () =>
+  //     import(/* webpackChunkName: "login" */ "../views/LoginView.vue"),
+  //   meta: {
+  //     adminOnly: false,
+  //     requireLogin: false,
+  //     visible: true,
+  //     access: ACCESS_ENUM.NOT_LOGIN,
+  //   },
+  // },
   {
-    path: "/login",
-    name: "登录",
-    component: () =>
-      import(/* webpackChunkName: "login" */ "../views/LoginView.vue"),
-    meta: {
-      adminOnly: false,
-      requireLogin: false,
-      visible: true,
-      access: ACCESS_ENUM.NOT_LOGIN,
-    },
+    path: "/user",
+    name: "用户",
+    component: () => import("@/layouts/UserLayout.vue"),
+    children: [
+      {
+        path: "/user/login",
+        name: "登录",
+        component: () => import("@/views/user/LoginView.vue"),
+        meta: {
+          adminOnly: false,
+          requireLogin: false,
+          visible: true,
+          access: ACCESS_ENUM.NOT_LOGIN,
+        },
+      },
+      {
+        path: "/user/register",
+        name: "注册",
+        component: () => import("@/views/user/RegisterView.vue"),
+        meta: {
+          adminOnly: false,
+          requireLogin: false,
+          visible: true,
+          access: ACCESS_ENUM.NOT_LOGIN,
+        },
+      },
+    ],
   },
 ];

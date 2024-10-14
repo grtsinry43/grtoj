@@ -19,8 +19,8 @@ export default {
     async getUserInfo({ commit }) {
       // api 获取用户信息
       const res: any = await getLoginUserUsingGet();
-      if (res.code === 0) {
-        commit("updateUser", res.data);
+      if (res.data.code === 0) {
+        commit("updateUser", res.data.data);
       } else {
         commit("updateUser", {
           ...state().loginUser,
@@ -31,7 +31,9 @@ export default {
   },
   mutations: {
     updateUser(state, user) {
+      console.log("updateUser", user);
       state.loginUser = user;
+      console.log("state", state);
     },
   },
 } as StoreOptions<any>;

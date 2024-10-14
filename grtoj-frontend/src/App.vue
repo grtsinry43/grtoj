@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <BasicLayout />
+    <template v-if="router.path.startsWith('/user')">
+      <router-view />
+    </template>
+    <template v-else>
+      <BasicLayout />
+    </template>
   </div>
 </template>
 
@@ -8,6 +13,9 @@
 import BasicLayout from "@/layouts/BasicLayout.vue";
 import { onMounted } from "vue";
 import { printGitInfo } from "@/utils/gitInfo";
+import { useRoute } from "vue-router";
+
+const router = useRoute();
 
 const doInit = () => {
   printGitInfo();

@@ -1,18 +1,10 @@
 import { StoreOptions } from "vuex";
-
-// 定义类型，解决ts报错
-export interface User {
-  userName: string;
-  userRole?: string;
-}
-
-interface State {
-  loginUser: User;
-}
+import { getLoginUserUsingGet } from "@/api";
+import ACCESS_ENUM from "@/permissions/accessEnum";
 
 const state = () => ({
   loginUser: {
-    userName: "test",
+    userName: "",
   },
 });
 
@@ -24,12 +16,17 @@ export default {
   state,
   getters,
   actions: {
-    getUserInfo({ commit }) {
-      // TODO: api获取用户信息
-      commit("updateUser", {
-        userName: "Just Login",
-        userRole: "admin",
-      });
+    async getUserInfo({ commit }) {
+      // api 获取用户信息
+      const res: any = await getLoginUserUsingGet();
+      if (res.code === 0) {
+        commit("updateUser", res.data);
+      } else {
+        commit("updateUser", {
+          ...state().loginUser,
+          userRole: ACCESS_ENUM.NOT_LOGIN,
+        });
+      }
     },
   },
   mutations: {
@@ -37,4 +34,4 @@ export default {
       state.loginUser = user;
     },
   },
-} as StoreOptions<State>;
+} as StoreOptions<any>;

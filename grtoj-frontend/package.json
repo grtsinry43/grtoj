@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@hey-api/client-axios": "^0.2.9",
+    "@hey-api/client-fetch": "^0.4.2",
     "child_process": "^1.0.2",
     "core-js": "^3.8.3",
     "vite-plugin-env-compatible": "^2.0.1",

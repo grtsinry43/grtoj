@@ -12,6 +12,12 @@ module.exports = defineConfig({
   // 配置 devServer，例如更改端口
   devServer: {
     port: 3000,
+    proxy: {
+      "/api": {
+        target: "http://localhost:8101",
+        changeOrigin: true,
+      },
+    },
   },
 
   // 扩展 Webpack 配置

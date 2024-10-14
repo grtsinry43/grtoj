@@ -1,4 +1,3 @@
-import type { User } from "@/store/modules/user";
 import ACCESS_ENUM from "@/permissions/accessEnum";
 
 /**
@@ -8,7 +7,7 @@ import ACCESS_ENUM from "@/permissions/accessEnum";
  * @returns 是否有权限
  */
 const checkAccess = (
-  loginUser: User,
+  loginUser: any,
   needAccess = ACCESS_ENUM.NOT_LOGIN
 ): boolean => {
   // 获取当前登录用户的权限，如果没有登录则默认为未登录
